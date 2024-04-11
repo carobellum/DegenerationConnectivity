@@ -1,10 +1,6 @@
 # DegenerationConnectivity
 Code for analysing functional connectivity of cerebellar degeneration patients for manuscript Nettekoven et al., 2024.
 
-## Dependencies:
-
-see ```requirements.txt```
-
 ## Dataset information
 The data files available in this repository were derived from MRI scans of 40 patients diagnosed with pure cerebellar cortical degeneration and 40 age and sex-matched neurologically healthy individuals. All individuals participated a five-day motor training and underwent a functional and structural MRI scan on the days before and after training. 
 
@@ -16,6 +12,8 @@ Functional data is missing for (subject, timepoint):
 Structural data was acquired from all subjects.
 
 ## Template information
+![Template created from 40 patients with cerebellar degeneration and 40 healthy subjects](img/template.png)
+
 A study-specific template is included into this repository under template/DeCon_template.nii.gz
 
 | File                                  | Description                                                |
@@ -28,6 +26,8 @@ A study-specific template is included into this repository under template/DeCon_
 
 
 ## Notebooks / Code to replicate different sections of the paper
+
+Dependencies for all code sections: see ```requirements.txt``` (run pip install -r requirements to install all required packages into your environment)
 
 ### Study demographics
 Study demographics, demographics for template generation and validation sample (Supplementary Table 1), and demographics for FIX training datasets
