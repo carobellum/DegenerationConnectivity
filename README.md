@@ -31,46 +31,46 @@ Dependencies for all code sections: see ```requirements.txt``` (run pip install 
 
 ### Study demographics
 Study demographics, demographics for template generation and validation sample (Supplementary Table 1), and demographics for FIX training datasets
-```demographics.ipynb```
+```notebooks/demographics.ipynb```
 
 ### Study-specific template
 Fissure distances in template, SUIT and MNI space was calculated using:
-```compare_fissures.py```
+```scripts/compare_fissures.py```
 
 Fissure overlap was plotted (Fig 1B-D) and compared using:
-```stats_template.ipynb```
+```notebooks/stats_template.ipynb```
 
 FIX performance with template registrations and standard registrations was plotted (Fig 1E) and evaluated using:
-```stats_fix.ipynb```
+```notebooks/stats_fix.ipynb```
 
 ### Connectivity
 
 #### Extracting ROI timecourses
 
 ROI timecourses were extracted from functional data in native space using:
-```seed_ts.sh```
+```scripts/seed_ts.sh```
 
 #### Correlating ROI timecourses
 
 Functional connectivity between timecourses was calculated using:
-```seed_corr.py```
+```scripts/seed_corr.py```
 
 #### Statistical analysis of functional connectivity
 Data was loaded from dataframes, normalized and brought into the correct shape for analysis using:
-```data_connectivity.R```
+```r/data_connectivity.R```
 
 Baseline connectivity differences were plotted (Fig 3A & 3B) using:
-```plots_connectivity.ipynb```
+```r/plots_connectivity.R```
 
 Connectivity change was plotted (Fig 4, 5, 6 & 7) using:
-```plots_connectivity_change.ipynb```
+```notebooks/plots_connectivity_change.ipynb```
 
 Statistical tests on functional connectivity were calculated using:
-```stats.R```
+```r/stats.R```
 
 Model assumptions were tested using:
-```model_assumptions.R```
+```r/model_assumptions.R```
 
 Connectivity results were plotted using:
-```plots_connectivity.R``` 
+```r/plots_connectivity.R``` 
 
