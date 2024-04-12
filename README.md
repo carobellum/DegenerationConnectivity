@@ -2,7 +2,9 @@
 Code for analysing functional connectivity of cerebellar degeneration patients for manuscript Nettekoven et al., 2024.
 
 ## Dataset information
-The data files available in this repository were derived from MRI scans of 40 patients diagnosed with pure cerebellar cortical degeneration and 40 age and sex-matched neurologically healthy individuals. All individuals participated a five-day motor training and underwent a functional and structural MRI scan on the days before and after training. 
+The data files available in this repository were derived from MRI scans of 40 patients diagnosed with pure cerebellar cortical degeneration and 40 age and sex-matched neurologically healthy individuals. All individuals participated a five-day motor training. On the days before and after training, participants underwent a structural MRI scan and a functional resting-state scan in addition to a motor assessment. 
+
+![Schematic of motor training apparatus and study design schematic](img/study_protocol.png)
 
 Functional data is missing for (subject, timepoint):
 - sub-57, post
@@ -10,19 +12,6 @@ Functional data is missing for (subject, timepoint):
 - sub-70, post
 
 Structural data was acquired from all subjects.
-
-## Template information
-![Template created from 40 patients with cerebellar degeneration and 40 healthy subjects](img/template.png)
-
-A study-specific template is included into this repository under template/DeCon_template.nii.gz
-
-| File                                  | Description                                                |
-| ------------------------------------- | ---------------------------------------------------------- |
-| DeCon_template.nii.gz                 | DeCon template image                                       |
-| DeCon_template_mask.nii.gz            | DeCon template whole-brain mask                            |
-| DeCon_template_cerebellar_mask.nii.gz | DeCon template cerebellar mask                             |
-| DeCon_to_MNI_warp.nii.gz              | DeCon template non-linear warp to MNI152NLin6Asym template |
-| MNI_to_DeCon_warp.nii.gz              | MNI152NLin6Asym template non-linear warp to DeCon template |
 
 
 ## Notebooks / Code to replicate different sections of the paper
@@ -42,6 +31,8 @@ Fissure overlap was plotted (Fig 1B-D) and compared using:
 
 FIX performance with template registrations and standard registrations was plotted (Fig 1E) and evaluated using:
 ```notebooks/stats_fix.ipynb```
+
+The study-specific template and associated files can be found in the [DegenerationControlTemplate](https://github.com/carobellum/DegenerationControlTemplate) repository.
 
 ### Connectivity
 
