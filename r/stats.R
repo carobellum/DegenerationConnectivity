@@ -362,7 +362,7 @@ print(aov)
 # Regions of interest
 region <- "m1-hand-left_cereb-M3-right"
 data_region <- data[data$regions == region,]
-modelRIM.Interaction      = lmer(connectivity ~  group*session + (1 | subject), data=data_region, REML = FALSE)
+modelRIM.Interaction      = lmer(connectivity ~  group*session*vision*feedback + (1 | subject), data=data_region, REML = FALSE)
 aov <- anova(modelRIM.Interaction)  
 print(aov)
 # Save table as latex table
@@ -383,7 +383,7 @@ cat(sprintf("post: %.2f ± %.2f\n", mean(data_region_nonnorm_post$connectivity),
 # Control analysis: Ipsilateral M1
 region <- "m1-hand-right_cereb-M3-left"
 data_region <- data[data$regions == region,]
-modelRIM.Interaction      = lmer(connectivity ~  group*session + (1 | subject), data=data_region, REML = FALSE)
+modelRIM.Interaction      = lmer(connectivity ~  group*session*vision*feedback + (1 | subject), data=data_region, REML = FALSE)
 aov <- anova(modelRIM.Interaction)  
 print(aov)
 
@@ -396,12 +396,12 @@ print(latex_anova, include.rownames = TRUE, file = file_path)
 # Control analysis: M1-M1
 region <- "m1-hand-left_m1-hand-right"
 data_region <- data[data$regions == region,]
-modelRIM.Interaction      = lmer(connectivity ~  group*session + (1 | subject), data=data_region, REML = FALSE)
+modelRIM.Interaction      = lmer(connectivity ~  group*session*vision*feedback + (1 | subject), data=data_region, REML = FALSE)
 aov <- anova(modelRIM.Interaction)  
 print(aov)
 
 # Control analysis: Cereb-Cereb
-region <- "M1-hand-left_cereb-M3-right"
+region <- "cereb-M3-left_cereb-M3-right"
 data_region <- data[data$regions == region,]
 modelRIM.Interaction      = lmer(connectivity ~  group*session*vision*feedback + (1 | subject), data=data_region, REML = FALSE)
 aov <- anova(modelRIM.Interaction)  

@@ -5,18 +5,11 @@ Compare distances between cerebellar fissures
 """
 
 
-from pathlib import Path
 import numpy as np
 import pandas as pd
 import glob
-import matplotlib.pyplot as plt
-import seaborn as sns
-import Functional_Fusion.util as util
-import itertools
-from scipy import stats
 import nibabel as nb
 import math
-from scipy import stats
 
 
 base_dir = '/Users/callithrix/Documents/Projects/Cerebellar_Degeneration/derivatives/'

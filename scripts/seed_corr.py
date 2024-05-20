@@ -11,7 +11,7 @@ import pandas as pd
 import glob
 import matplotlib.pyplot as plt
 import seaborn as sns
-import Functional_Fusion.util as util
+import util as util
 import nitools as nt
 import itertools
 from scipy import stats
