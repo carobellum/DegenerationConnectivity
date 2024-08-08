@@ -1,5 +1,5 @@
 # DegenerationConnectivity
-Code for analysing functional connectivity of cerebellar degeneration patients for manuscript Nettekoven et al., 2024.
+Code for analysing functional connectivity of cerebellar degeneration patients for manuscript [Nettekoven et al., 2024](https://doi.org/10.1101/2024.07.05.602300).
 
 ## Dataset information
 The data files available in this repository were derived from MRI scans of 40 patients diagnosed with pure cerebellar cortical degeneration and 40 age and sex-matched neurologically healthy individuals. All individuals participated a five-day motor training. On the days before and after training, participants underwent a structural MRI scan and a functional resting-state scan in addition to a motor assessment. 
