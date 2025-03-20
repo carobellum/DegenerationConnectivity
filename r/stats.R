@@ -148,6 +148,29 @@ for (i in seq_along(vision)) {
     print(results[[i]])
   }
 }
+# ---------------------- Change in right PMD - right Cerebellar connectivity depends on vision ---------[specific]-----------------
+
+# Region of interest
+region <- "pmd-right_cereb-M3-right"
+data_region <- data[data$regions == region,]
+modelRIM.Interaction      = lmer(connectivity ~  group*session*vision*feedback + (1 | subject), data=data_region, REML = FALSE)
+aov <- anova(modelRIM.Interaction)
+print(aov)
+# Save table as latex table
+split_regions <- strsplit(region, "_")
+latex_anova <- xtable(aov, caption = paste("Linear mixed effects model for connectivity between ", split_regions[[1]][1], " and ", split_regions[[1]][2], sep=""))
+file_path <- paste(table_path, region, ".tex", sep="")
+print(latex_anova, include.rownames = TRUE, file = file_path)
+
+
+
+# Mean and sd: groupwise
+data_region_nonnorm_p <- data_non_norm[(data_non_norm$regions == region) & (data_non_norm$group == 'p'),]
+data_region_nonnorm_c <- data_non_norm[(data_non_norm$regions == region) & (data_non_norm$group == 'c'),]
+cat(sprintf("patient: %.2f ± %.2f\n", mean(data_region_nonnorm_p$connectivity), sd(data_region_nonnorm_p$connectivity)))
+cat(sprintf("control: %.2f ± %.2f\n", mean(data_region_nonnorm_c$connectivity), sd(data_region_nonnorm_c$connectivity)))
+
+
 # ---------------------- Change in right PMD - left Cerebellar connectivity depends on vision ---------[specific]-----------------
 # Region of interest
 region <- "pmd-right_cereb-M3-left"
