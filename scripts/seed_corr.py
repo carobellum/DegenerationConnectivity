@@ -182,8 +182,58 @@ def get_data(subjects, sessions, rois, conn):
 
     return data_long, data_wide
 
+def regions_main_analysis():
+    regions_contra = [
+                    'ppc-right_cereb-M3-left',
+                    'ppc-left_cereb-M3-right',
+                    'pmd-left_cereb-M3-right',
+                    'pmd-right_cereb-M3-left',
+                    'm1-hand-left_cereb-M3-right',
+                    'm1-hand-right_cereb-M3-left',
+                    'dlpfc-right_cereb-D2-left',
+                    
+                    ]
 
-def select_regions(data_long, data_wide):
+    regions_ipsi = [
+                    'ppc-right_cereb-M3-right',
+                    'ppc-left_cereb-M3-left',
+                    'pmd-right_cereb-M3-right',
+                    'pmd-left_cereb-M3-left',
+                    'm1-hand-right_cereb-M3-right',
+                    'm1-hand-left_cereb-M3-left',
+                    'dlpfc-right_cereb-D2-right',
+                    
+                    ]
+
+    regions_cortico = [
+                    'ppc-left_ppc-right',
+                    'pmd-left_pmd-right',
+                    'm1-hand-left_m1-hand-right',
+                    ]
+
+    regions_cereb = [
+                    'cereb-D2-left_cereb-D2-right',
+                    'cereb-M3-left_cereb-M3-right',
+                    ]
+    regions_control = [
+                    'dlfpc-right_cereb-S1-left',
+                    'dlfpc-right_cereb-S1-right',                    
+                    ]
+    
+    regions_selected = [*regions_contra, *
+                        regions_ipsi, *regions_cortico, *regions_cereb, *regions_control]
+    return regions_selected, [regions_contra, regions_ipsi, regions_cortico, regions_cereb, regions_control]
+
+def regions_control_analysis():
+    regions_control = [
+                    'dlfpc-right_cereb-S1-left',
+                    'dlfpc-right_cereb-S1-right',                    
+                    ]
+    
+    regions_selected = [*regions_control]
+    return regions_selected, [regions_control]
+
+def select_regions(data_long, data_wide, control_regions=False):
     """
     Selects specific regions from the input data based on predefined criteria.
 
@@ -231,46 +281,19 @@ def select_regions(data_long, data_wide):
     data_wide = data_wide.rename(replace_regions, axis='columns')
     data_long['regions'] = data_long['regions'].replace(replace_regions)
 
-    regions_contra = [
-                    'ppc-right_cereb-M3-left',
-                    'ppc-left_cereb-M3-right',
-                    'pmd-left_cereb-M3-right',
-                    'pmd-right_cereb-M3-left',
-                    'm1-hand-left_cereb-M3-right',
-                    'm1-hand-right_cereb-M3-left',
-                    'dlpfc-right_cereb-D2-left',
-                    ]
+    if control_regions==True:
+        regions_selected, region_list = regions_control_analysis()
+    else:
+        regions_selected, region_list = regions_main_analysis()
+    
 
-    regions_ipsi = [
-                    'ppc-right_cereb-M3-right',
-                    'ppc-left_cereb-M3-left',
-                    'pmd-right_cereb-M3-right',
-                    'pmd-left_cereb-M3-left',
-                    'm1-hand-right_cereb-M3-right',
-                    'm1-hand-left_cereb-M3-left',
-                    'dlpfc-right_cereb-D2-right'
-                    ]
-
-    regions_cortico = [
-                    'ppc-left_ppc-right',
-                    'pmd-left_pmd-right',
-                    'm1-hand-left_m1-hand-right',
-                    ]
-
-    regions_cereb = [
-                    'cereb-D2-left_cereb-D2-right',
-                    'cereb-M3-left_cereb-M3-right',
-                    ]
-
-    regions_selected = [*regions_contra, *
-                        regions_ipsi, *regions_cortico, *regions_cereb]
     data_long = data_long[data_long['regions'].isin(regions_selected)]
 
     selected_columns = [*data_long.columns.drop('regions').drop('connectivity'),
                         *regions_selected]
     data_wide = data_wide[selected_columns]
 
-    return data_long, data_wide, regions_contra, regions_ipsi, regions_cortico, regions_cereb
+    return data_long, data_wide, region_list
 
 
 def select_atlas_regions(ts, rois, selected_rois):
@@ -283,14 +306,22 @@ def select_atlas_regions(ts, rois, selected_rois):
 
 
 if __name__ == '__main__':
-    prepare_atlas_ts()
+    prepare_atlas_ts(regions=['S1'])
     ts, rois, subjects, sessions = import_ts()
     coefs = correlate_ts(ts)
     conn = get_conn(coefs, rois)
     data_long, data_wide = get_data(subjects, sessions, rois, conn)
-    data_long, data_wide, regions_contra, regions_ipsi, regions_cortico, regions_cereb = select_regions(
+    data_long, data_wide, region_list = select_regions(
         data_long, data_wide)
+    regions_contra, regions_ipsi, regions_cortico, regions_cereb, regions_control = region_list
     data_long.to_csv(f'data/connectivity.tsv', sep='\t')
     data_wide.to_csv(f'data/connectivity_wide.tsv', sep='\t')
+
+
+    data_long, data_wide, region_list = select_regions(
+    data_long, data_wide, control_regions=True)
+    # regions_contra, regions_ipsi, regions_cortico, regions_cereb, regions_control = region_list
+    data_long.to_csv(f'data/connectivity_control.tsv', sep='\t')
+    data_wide.to_csv(f'data/connectivity_wide_control.tsv', sep='\t')
 
     
