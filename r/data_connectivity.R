@@ -97,6 +97,7 @@ dropvars <- names(diff) %in% demographic_vars
 
 # ---- Create dataframe for mean subject cortico-cortico, cortico-cerebello and cerebello-cerebello connectivity ----
 # Select connectivity ROIs
+connectivity_pre <- data[data$session == 'ses-pre',]
 connectivity_pre_select <- connectivity_pre[connectivity_pre$regions %in% c(pmd_regions, ppc_regions, m1_regions, cereb_regions),]
 
 # Group by subject and region_type factors
