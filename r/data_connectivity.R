@@ -96,6 +96,7 @@ data$interregional <- factor(data$interregional, levels = c("cortico-cortico", "
 dropvars <- names(diff) %in% demographic_vars
 
 # ---- Create dataframe for mean subject cortico-cortico, cortico-cerebello and cerebello-cerebello connectivity ----
+connectivity_pre <- data[data$session=="ses-pre",]
 # Select connectivity ROIs
 connectivity_pre_select <- connectivity_pre[connectivity_pre$regions %in% c(pmd_regions, ppc_regions, m1_regions, cereb_regions),]
 
